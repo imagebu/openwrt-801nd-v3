@@ -36,7 +36,7 @@ jobs:
           make -j$(nproc)
 
       - name: Upload firmware artifacts
-        uses: actions/upload-artifact@v3.0.0
+        uses: actions/upload-artifact@v3.1.1
         with:
           name: OpenWRT-801ND-v3-Firmware
           path: openwrt/bin/targets/**
