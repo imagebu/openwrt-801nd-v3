@@ -1,4 +1,4 @@
- name: Build OpenWrt 801ND v3 TR
+name: Build OpenWrt 801ND v3 TR
 
 on:
   workflow_dispatch:
@@ -19,91 +19,16 @@ jobs:
       - name: Clone OpenWrt source
         run: |
           git clone -b v18.06.9 https://git.openwrt.org/openwrt/openwrt.git
+          cd openwrt
+          ./scripts/feeds update -a
+          ./scripts/feeds install -a
 
       - name: Configure build
         run: |
           cd openwrt
-          ./scripts/feeds update -a
-          ./scripts/feeds install -a
-          cat <<EOF > .config
-CONFIG_TARGET_ar71xx=y
-CONFIG_TARGET_ar71xx_tiny=y
-CONFIG_TARGET_ar71xx_tiny_DEVICE_tl-wa801nd-v3=y
-CONFIG_PACKAGE_luci=y
-CONFIG_PACKAGE_luci-i18n-base-tr=y
-CONFIG_PACKAGE_wpad-mini=y
-CONFIG_PACKAGE_ppp=y
-CONFIG_PACKAGE_iptables=y
-CONFIG_PACKAGE_base-files=y
-CONFIG_PACKAGE_busybox=y
-CONFIG_PACKAGE_dnsmasq=y
-CONFIG_PACKAGE_dropbear=y
-CONFIG_PACKAGE_fstools=y
-CONFIG_PACKAGE_fwtool=y
-CONFIG_PACKAGE_hostapd-common=y
-CONFIG_PACKAGE_iw=y
-CONFIG_PACKAGE_iwinfo=y
-CONFIG_PACKAGE_jshn=y
-CONFIG_PACKAGE_jsonfilter=y
-CONFIG_PACKAGE_kernel=y
-CONFIG_PACKAGE_kmod-ath=y
-CONFIG_PACKAGE_kmod-ath9k=y
-CONFIG_PACKAGE_kmod-ath9k-common=y
-CONFIG_PACKAGE_kmod-cfg80211=y
-CONFIG_PACKAGE_kmod-gpio-button-hotplug=y
-CONFIG_PACKAGE_kmod-ipt-conntrack=y
-CONFIG_PACKAGE_kmod-ipt-nat=y
-CONFIG_PACKAGE_kmod-lib-crc-ccitt=y
-CONFIG_PACKAGE_kmod-mac80211=y
-CONFIG_PACKAGE_kmod-nf-conntrack=y
-CONFIG_PACKAGE_kmod-nf-ipt=y
-CONFIG_PACKAGE_kmod-nf-nat=y
-CONFIG_PACKAGE_libblobmsg-json=y
-CONFIG_PACKAGE_libc=y
-CONFIG_PACKAGE_libgcc=y
-CONFIG_PACKAGE_libip4tc=y
-CONFIG_PACKAGE_libiwinfo=y
-CONFIG_PACKAGE_libiwinfo-lua=y
-CONFIG_PACKAGE_libjson-c=y
-CONFIG_PACKAGE_libjson-script=y
-CONFIG_PACKAGE_liblua=y
-CONFIG_PACKAGE_liblucihttp=y
-CONFIG_PACKAGE_liblucihttp-lua=y
-CONFIG_PACKAGE_libnl-tiny=y
-CONFIG_PACKAGE_libpthread=y
-CONFIG_PACKAGE_libubox=y
-CONFIG_PACKAGE_libubus=y
-CONFIG_PACKAGE_libubus-lua=y
-CONFIG_PACKAGE_libuci=y
-CONFIG_PACKAGE_libuclient=y
-CONFIG_PACKAGE_libxtables=y
-CONFIG_PACKAGE_lua=y
-CONFIG_PACKAGE_luci-base=y
-CONFIG_PACKAGE_luci-lib-ip=y
-CONFIG_PACKAGE_luci-lib-jsonc=y
-CONFIG_PACKAGE_luci-lib-nixio=y
-CONFIG_PACKAGE_luci-mod-admin-full=y
-CONFIG_PACKAGE_luci-proto-relay=y
-CONFIG_PACKAGE_luci-theme-bootstrap=y
-CONFIG_PACKAGE_mtd=y
-CONFIG_PACKAGE_netifd=y
-CONFIG_PACKAGE_openwrt-keyring=y
-CONFIG_PACKAGE_opkg=y
-CONFIG_PACKAGE_procd=y
-CONFIG_PACKAGE_relayd=y
-CONFIG_PACKAGE_rpcd=y
-CONFIG_PACKAGE_rpcd-mod-rrdns=y
-CONFIG_PACKAGE_swconfig=y
-CONFIG_PACKAGE_uboot-envtools=y
-CONFIG_PACKAGE_ubox=y
-CONFIG_PACKAGE_ubus=y
-CONFIG_PACKAGE_ubusd=y
-CONFIG_PACKAGE_uci=y
-CONFIG_PACKAGE_uclient-fetch=y
-CONFIG_PACKAGE_uhttpd=y
-CONFIG_PACKAGE_usign=y
-CONFIG_PACKAGE_wireless-regdb=y
-EOF
+          make defconfig
+          echo -e "CONFIG_TARGET_ar71xx=y\nCONFIG_TARGET_ar71xx_tiny=y\nCONFIG_TARGET_ar71xx_tiny_DEVICE_tl-wa801nd-v3=y\nCONFIG_PACKAGE_luci=y\nCONFIG_PACKAGE_luci-i18n-base-tr=y\nCONFIG_PACKAGE_wpad-mini=y\nCONFIG_PACKAGE_ppp=y\nCONFIG_PACKAGE_iptables=y\nCONFIG_PACKAGE_base-files=y\nCONFIG_PACKAGE_busybox=y\nCONFIG_PACKAGE_dnsmasq=y\nCONFIG_PACKAGE_dropbear=y\nCONFIG_PACKAGE_fstools=y\nCONFIG_PACKAGE_fwtool=y\nCONFIG_PACKAGE_hostapd-common=y\nCONFIG_PACKAGE_iw=y\nCONFIG_PACKAGE_iwinfo=y\nCONFIG_PACKAGE_jshn=y\nCONFIG_PACKAGE_jsonfilter=y\nCONFIG_PACKAGE_kernel=y\nCONFIG_PACKAGE_kmod-ath=y\nCONFIG_PACKAGE_kmod-ath9k=y\nCONFIG_PACKAGE_kmod-ath9k-common=y\nCONFIG_PACKAGE_kmod-cfg80211=y\nCONFIG_PACKAGE_kmod-gpio-button-hotplug=y\nCONFIG_PACKAGE_kmod-ipt-conntrack=y\nCONFIG_PACKAGE_kmod-ipt-nat=y\nCONFIG_PACKAGE_kmod-lib-crc-ccitt=y\nCONFIG_PACKAGE_kmod-mac80211=y\nCONFIG_PACKAGE_kmod-nf-conntrack=y\nCONFIG_PACKAGE_kmod-nf-ipt=y\nCONFIG_PACKAGE_kmod-nf-nat=y\nCONFIG_PACKAGE_libblobmsg-json=y\nCONFIG_PACKAGE_libc=y\nCONFIG_PACKAGE_libgcc=y\nCONFIG_PACKAGE_libip4tc=y\nCONFIG_PACKAGE_libiwinfo=y\nCONFIG_PACKAGE_libiwinfo-lua=y\nCONFIG_PACKAGE_libjson-c=y\nCONFIG_PACKAGE_libjson-script=y\nCONFIG_PACKAGE_liblua=y\nCONFIG_PACKAGE_liblucihttp=y\nCONFIG_PACKAGE_liblucihttp-lua=y\nCONFIG_PACKAGE_libnl-tiny=y\nCONFIG_PACKAGE_libpthread=y\nCONFIG_PACKAGE_libubox=y\nCONFIG_PACKAGE_libubus=y\nCONFIG_PACKAGE_libubus-lua=y\nCONFIG_PACKAGE_libuci=y\nCONFIG_PACKAGE_libuclient=y\nCONFIG_PACKAGE_libxtables=y\nCONFIG_PACKAGE_lua=y\nCONFIG_PACKAGE_luci-base=y\nCONFIG_PACKAGE_luci-lib-ip=y\nCONFIG_PACKAGE_luci-lib-jsonc=y\nCONFIG_PACKAGE_luci-lib-nixio=y\nCONFIG_PACKAGE_luci-mod-admin-full=y\nCONFIG_PACKAGE_luci-proto-relay=y\nCONFIG_PACKAGE_luci-theme-bootstrap=y\nCONFIG_PACKAGE_mtd=y\nCONFIG_PACKAGE_netifd=y\nCONFIG_PACKAGE_openwrt-keyring=y\nCONFIG_PACKAGE_opkg=y\nCONFIG_PACKAGE_procd=y\nCONFIG_PACKAGE_relayd=y\nCONFIG_PACKAGE_rpcd=y\nCONFIG_PACKAGE_rpcd-mod-rrdns=y\nCONFIG_PACKAGE_swconfig=y\nCONFIG_PACKAGE_uboot-envtools=y\nCONFIG_PACKAGE_ubox=y\nCONFIG_PACKAGE_ubus=y\nCONFIG_PACKAGE_ubusd=y\nCONFIG_PACKAGE_uci=y\nCONFIG_PACKAGE_uclient-fetch=y\nCONFIG_PACKAGE_uhttpd=y\nCONFIG_PACKAGE_usign=y\nCONFIG_PACKAGE_wireless-regdb=y" > openwrt/.config
+          cd openwrt
           make defconfig
 
       - name: Build firmware
@@ -111,8 +36,8 @@ EOF
           cd openwrt
           make -j$(nproc)
 
-      - name: Upload firmware
+      - name: Upload firmware artifacts
         uses: actions/upload-artifact@v3
         with:
           name: OpenWRT-801ND-v3-Firmware
-          path: openwrt/bin/targets/
+          path: openwrt/bin/targets/**
