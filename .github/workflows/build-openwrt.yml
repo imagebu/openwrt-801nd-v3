@@ -1,4 +1,4 @@
-name: Build OpenWrt 801ND v3 TR
+ name: Build OpenWrt 801ND v3 TR
 
 on:
   workflow_dispatch:
